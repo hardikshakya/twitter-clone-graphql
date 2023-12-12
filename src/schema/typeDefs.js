@@ -18,6 +18,13 @@ const typeDefs = `#graphql
     post(id: ID!): Post
     user(id: ID!): User
   }
+
+  type Mutation {
+    createPost(content: String!, authorId: ID!): Post
+    updatePost(id: ID!, content: String!): Post
+    deletePost(id: ID!): String
+    toggleLikePost(postId: ID!, userId: ID!): Post
+  }
 `;
 
 export default typeDefs;
