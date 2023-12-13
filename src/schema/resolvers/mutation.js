@@ -36,7 +36,7 @@ const Mutation = {
     throw new Error('Post not found');
   },
 
-  toggleLikePost: (_, { postId, userId }) => {
+  toggleLikePost: (_, { postId, userId }, { io }) => {
     const post = data.posts.find((post) => post.id === postId);
     const user = data.users.find((user) => user.id === userId);
 
@@ -55,6 +55,11 @@ const Mutation = {
     }
 
     post.likeCount = post.likes.length;
+
+    io.emit('likeCountUpdated', {
+      postId: postId,
+      likeCount: post.likeCount,
+    });
     return post;
   },
 };
